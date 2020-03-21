@@ -1,0 +1,153 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Node
+    {
+        public int value;
+        public Node next;
+
+        public Node(int x)
+        {
+            value = x;
+
+        }
+    }
+
+    class lList
+    {
+        public Node head;
+        public int Count;
+
+        public lList()
+        {
+
+        }
+        public void AddLast(int x)
+        {
+            var toAdd = new Node(x);
+            if(head==null)
+            {
+                head = toAdd;
+            }
+            else
+            {
+                Node current = head;
+                while (current.next != null)
+                    current = current.next;
+                current.next = toAdd;
+
+            }
+            Count++;
+        }
+        public int this [int index]
+        {
+            get
+            {
+                Node current = head;
+                for (int i = 0; i != index && current !=null;i++)
+                    current = current.next;
+                return current.value;
+            }
+            set
+            {
+                Node current = head;
+                for (int i = 0; i != index && current != null; i++)
+                    current = current.next;
+                current.value = value; 
+            }
+        }
+        public void AddFirst(int x)
+        {
+            var toAdd = new Node(x);
+
+            toAdd.next = head;
+            head = toAdd;
+            Count++;
+        }
+        public void Clear()
+        {
+            head = null;
+            Count = 0;
+        }
+        public void Insert(int index, int x)
+        {
+            
+            if(head==null)
+            {
+                var toAdd = new Node(x);
+                head = toAdd;
+            }
+            else
+            {
+                
+                if (index==0)
+                {
+                    AddFirst(x);
+                }
+                else
+                {
+                    var toAdd = new Node(x);
+                    Node current = head;
+                    Node previous = head;
+                    for(int i=0; i<index;++i)
+                    {
+                        previous = current;
+                        current = current.next;
+                    }
+                    previous.next = toAdd;
+                    toAdd.next = current;
+                    Count++;
+                }
+            }
+        }
+        public void Remove(int index)
+        {
+            if(head!=null)
+            {
+                Count--;
+                if(index==0)
+                {
+                    head = head.next;
+                }
+                else if(index<Count-1)
+                {
+                    Node current = head;
+                    for(int i=0; i<index-1 && current!=null;++i)
+                    {
+                        current = current.next;
+                    }
+                    current = current.next.next;
+                }
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var lst = new lList();
+            lst.AddLast(1);
+            lst.AddLast(2);
+            lst.AddLast(3);
+            lst.AddLast(4);
+
+            //lst[0] = 5;
+            //lst.AddFirst(0);
+            //lst.Insert(2, 6);
+            lst.Remove(6);
+
+            for(int i=0; i !=lst.Count; i++)
+            {
+                Console.WriteLine(lst[i]+"->");
+            }
+            Console.WriteLine("null");
+
+            //Console.WriteLine(lst.head.value);
+            //Console.WriteLine(lst.head.next.value);
+            //Console.WriteLine(lst.head.next.next.value);
+        }
+
+
+    }
+}
