@@ -1,0 +1,15 @@
+ public static class MB_tak
+    {
+        public static int IndexOf<T>(this LinkedList<T> list, T find)
+        {
+            int s = -1;
+            foreach (var iter in list)
+            {
+                ++s;
+
+                if (iter.Equals(find))
+                    break;
+            }
+            return s;
+        }
+    }
