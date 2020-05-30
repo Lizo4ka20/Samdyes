@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+namespace RandomList
+{
+    internal static class Program
+    {
+        private static void Main()
+        {
+            var list = new List<int>();
+
+            var random = new Random();
+
+            for (var i = 0; i < 25; ++i)
+            {
+                list.Add(random.Next(100));
+            }
+
+            list.Sort();
+
+            var toInsert = random.Next(100);
+
+            var index = list.BinarySearch(toInsert);
+
+            if (index < 0)
+            {
+                index = ~index;
+            }
+
+            list.Insert(index, toInsert);
+        }
+    }
+}
